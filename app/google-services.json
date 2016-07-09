@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "906487560888",
+    "project_id": "firebase-fundsofhope"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906487560888:android:a47c3350823e7dd6",
+        "android_client_info": {
+          "package_name": "org.fundsofhope.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906487560888-msbkt00o1ddhcvbb3fts7ihtdiie3vff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.fundsofhope.android",
+            "certificate_hash": "490D7EA1F037C93705DA89CB5F2A739F7CD29167"
+          }
+        },
+        {
+          "client_id": "906487560888-8po7ar461ou6rraed16vafrj2j8ksjrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEXq2wg6ajy-C9bPnDnEJnylpHQ9XqZMA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

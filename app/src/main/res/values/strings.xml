@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fundsofhope</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="server_client_id">906487560888-8po7ar461ou6rraed16vafrj2j8ksjrq.apps.googleusercontent.com</string>
+</resources>
