@@ -4,4 +4,8 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="server_client_id">906487560888-8po7ar461ou6rraed16vafrj2j8ksjrq.apps.googleusercontent.com</string>
+    <string name="loading">Loading..</string>
+
+    <string name="fb_login_protocol_scheme">fb1525793961071513</string>
+    <string name="fb_app_id">1525793961071513</string>
 </resources>

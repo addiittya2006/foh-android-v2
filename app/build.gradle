@@ -7,7 +7,6 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
-
     defaultConfig {
         applicationId "org.fundsofhope.android"
         minSdkVersion 16
@@ -31,6 +30,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+        debug {
+            signingConfig signingConfigs.config
+        }
     }
 
     packagingOptions {
@@ -41,15 +43,12 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
-
-    compile 'com.google.android.gms:play-services-auth:9.2.0'
-
-    compile 'com.facebook.android:facebook-android-sdk:4.+'
-
+    compile 'com.google.android.gms:play-services-auth:9.2.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.14.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

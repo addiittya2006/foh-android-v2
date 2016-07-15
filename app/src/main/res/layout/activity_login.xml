@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            xmlns:tools="http://schemas.android.com/tools"
             android:fitsSystemWindows="true">
 
     <RelativeLayout
@@ -107,44 +108,42 @@
             android:paddingRight="8dp"
             android:weightSum="2">
 
-            <Button
+            <!--<Button-->
+            <!--android:id="@+id/facebook_login"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_marginRight="6dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/com_facebook_button_background"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="10dp"-->
+            <!--android:text="Facebook"-->
+            <!--android:textAlignment="gravity"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="16sp"/>-->
+
+            <com.facebook.login.widget.LoginButton
                 android:id="@+id/facebook_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="6dp"
-                android:layout_weight="1"
-                android:background="@drawable/com_facebook_button_background"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="facebookLogin"
-                android:padding="10dp"
-                android:text="Facebook"
-                android:textAlignment="gravity"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"/>
+                android:layout_gravity="center_horizontal"/>
 
             <Button
-                android:id="@+id/google_login"
+            android:id="@+id/sign_out_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="0dp"
+            android:background="#dd4b39"
+            android:text="Sign out"
+            android:textColor="@android:color/white"/>
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="0dp"
-                android:layout_weight="1"
-                android:background="#dd4b39"
-                android:clickable="true"
-                android:gravity="center"
-                android:onClick="successlog"
-
-                android:padding="10dp"
-                android:text="Google+"
-                android:textAlignment="gravity"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                />
+                android:layout_centerInParent="true"/>
 
         </LinearLayout>
     </RelativeLayout>

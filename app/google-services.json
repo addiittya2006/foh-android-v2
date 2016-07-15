@@ -1,19 +1,19 @@
 {
   "project_info": {
-    "project_number": "906487560888",
-    "project_id": "firebase-fundsofhope"
+    "project_number": "244606107829",
+    "project_id": "fundsofhope-83042"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:906487560888:android:a47c3350823e7dd6",
+        "mobilesdk_app_id": "1:244606107829:android:a47c3350823e7dd6",
         "android_client_info": {
           "package_name": "org.fundsofhope.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "906487560888-msbkt00o1ddhcvbb3fts7ihtdiie3vff.apps.googleusercontent.com",
+          "client_id": "244606107829-vn6n0qch6cmvdrqfk5gi0f3i4i9egptm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "org.fundsofhope.android",
@@ -21,13 +21,13 @@
           }
         },
         {
-          "client_id": "906487560888-8po7ar461ou6rraed16vafrj2j8ksjrq.apps.googleusercontent.com",
+          "client_id": "244606107829-4srlfvjrtnm29aiffdmjq5bprpejb4p8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBEXq2wg6ajy-C9bPnDnEJnylpHQ9XqZMA"
+          "current_key": "AIzaSyB_w91_R9gnroi4nw7JzDi1x53lyMFo1OA"
         }
       ],
       "services": {
