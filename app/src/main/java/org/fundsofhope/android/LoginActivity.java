@@ -95,6 +95,10 @@ public class LoginActivity extends AppCompatActivity implements
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
+            case R.id.btn_signup:
+                Intent intent1 = new Intent(LoginActivity.this, SplashActivity.class);
+                startActivity(intent1);
+                finish();
         }
     }
 
@@ -142,6 +146,7 @@ public class LoginActivity extends AppCompatActivity implements
 //        loginButton = (LoginButton) findViewById(R.id.facebook_login);
         findViewById(R.id.facebook_login).setOnClickListener(this);
         findViewById(R.id.btn_login).setOnClickListener(this);
+        findViewById(R.id.btn_signup).setOnClickListener(this);
 
 //        FacebookSdk.sdkInitialize(getApplicationContext());
 //        callbackManager = CallbackManager.Factory.create();
