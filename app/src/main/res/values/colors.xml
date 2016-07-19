@@ -6,8 +6,8 @@
     <color name="colorPrimary3">#80CBC4</color>
     <color name="colorPrimary4">#4DB6AC</color>
     <color name="colorPrimary5">#26A69A</color>
-    <color name="colorPrimary">#009688</color>
-    <color name="colorPrimary6">#00897B</color>
+    <color name="colorPrimary6">#009688</color>
+    <color name="colorPrimary">#00897B</color>
     <color name="colorPrimary7">#00796B</color>
     <color name="colorPrimary8">#00695C</color>
     <color name="colorPrimary9">#004D40</color>
@@ -17,9 +17,9 @@
     <color name="colorAccent3">#FFE082</color>
     <color name="colorAccent4">#FFD54F</color>
     <color name="colorAccent5">#FFCA28</color>
-    <color name="colorAccent">#FFC107</color>
-    <color name="colorAccent6">#FFB300</color>
-    <color name="colorAccent7">#FFA000</color>
+    <color name="colorAccent6">#FFC107</color>
+    <color name="colorAccent7">#FFB300</color>
+    <color name="colorAccent">#FFA000</color>
     <color name="colorAccent8">#FF8F00</color>
     <color name="colorAccent9">#FF6F00</color>
 
