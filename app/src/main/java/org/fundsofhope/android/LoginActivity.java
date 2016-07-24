@@ -1,8 +1,13 @@
 package org.fundsofhope.android;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -31,16 +36,39 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
+import org.fundsofhope.android.config.ApiInterface;
+import org.fundsofhope.android.config.ServiceGenerator;
+import org.fundsofhope.android.model.SignupStatus;
+import org.fundsofhope.android.util.NetworkUtilities;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Arrays;
+
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
 
     private static final String TAG = "LoginActivity";
+    public String name;
+    public String email;
+    public String phoneNo;
 
 
     //    TODO Self Signup
@@ -70,7 +98,6 @@ public class LoginActivity extends AppCompatActivity implements
 //    private boolean mShouldResolve = false;
 //
 //    private static final int REQUEST_SIGNUP = 0;
-
 
 
     // TODO Facebook Sign-on
@@ -162,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements
 
                         if (profile != null) {
                             makeGraphRequest(profile, accessToken);
-                            Toast.makeText(LoginActivity.this, "name" + profile.getName()+profile.getFirstName()+profile.getLastName()+profile.getId(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "name" + profile.getName() + profile.getFirstName() + profile.getLastName() + profile.getId(), Toast.LENGTH_LONG).show();
                         } else {
                             ProfileTracker profileTracker = new ProfileTracker() {
                                 @Override
@@ -296,8 +323,7 @@ public class LoginActivity extends AppCompatActivity implements
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
-        }
-        else{
+        } else {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -338,6 +364,7 @@ public class LoginActivity extends AppCompatActivity implements
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+            register(acct.getDisplayName(),  acct.getEmail(),"0123456789",acct.getIdToken());
 //            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
             Toast.makeText(LoginActivity.this, acct.getDisplayName(), Toast.LENGTH_SHORT).show();
             updateUI(true);
@@ -395,7 +422,9 @@ public class LoginActivity extends AppCompatActivity implements
                 final String firstName = user.optString("first_name");
                 final String lastName = user.optString("last_name");
                 final String birthday = user.optString("birthday");
-                Toast.makeText(LoginActivity.this,firstName+lastName+birthday+email+gender+name+fbId+fbPic+ageRangeMax+ageRangeMin, Toast.LENGTH_LONG).show();
+                register(firstName + lastName, email, "99000900", fbId);
+                Toast.makeText(LoginActivity.this, firstName + lastName + birthday + email + gender + name + fbId + fbPic + ageRangeMax + ageRangeMin, Toast.LENGTH_LONG).show();
+
             }
         });
         Bundle bundle = new Bundle();
@@ -404,6 +433,32 @@ public class LoginActivity extends AppCompatActivity implements
         request.executeAsync();
     }
 
+    private void register(String name, String email, String phoneNo, String fbCred) {
+        this.name = name;
+        this.email = email;
+        this.phoneNo = phoneNo;
+        String serverURL1 = "http://api.fundsofhope.org/signup/";
+        new LongOperation2().execute(serverURL1);
+        /*
+        if (NetworkUtilities.isInternet(LoginActivity.this)) {
+            ApiInterface apiInterface = ServiceGenerator.createService(ApiInterface.class);
+            apiInterface.signup(name,email,phoneNo,
+                    new retrofit.Callback<SignupStatus>() {
+                        @Override
+                        public void success(SignupStatus signupStatus, Response response) {
+
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            Log.d("TAG", "Response : Failure " + error.getMessage());
+                        }
+                    });
+        } else {
+//            DebugLog.d(getString(R.string.error_no_internet_connection));
+        }*/
+
+    }
 
     // TODO Google+ Login Extras
 //    @Override
@@ -625,7 +680,7 @@ public class LoginActivity extends AppCompatActivity implements
 //        _loginButton.setEnabled(true);
 //    }
 
-//    public boolean validate() {
+    //    public boolean validate() {
 //        boolean valid = true;
 //        String password = _passWord.getText().toString();
 //        if (password.isEmpty() || password.length() < 4 || password.length() > 10) {
@@ -636,5 +691,147 @@ public class LoginActivity extends AppCompatActivity implements
 //        }
 //        return valid;
 //    }
+    private class LongOperation2 extends AsyncTask<String, Void, SignupStatus> {
 
+        // Required initialization
+
+        // private final HttpClient Client = new DefaultHttpClient();
+        // private String Content;
+        private String Error = null;
+        private SignupStatus result;
+        String studentId;
+        private ProgressDialog Dialog = new ProgressDialog(LoginActivity.this);
+        String data = "";
+
+        int sizeData = 0;
+
+        protected void onPreExecute() {
+            // NOTE: You can call UI Element here.
+
+            // Start Progress Dialog (Message)
+            // String studentid="";
+
+            // Intent intent = getIntent();
+
+            // if (intent != null) {
+
+            // emailId = intent.getStringExtra("emailId");
+
+            // }*/
+
+            Dialog.setMessage("Please wait..");
+            Dialog.show();
+            // try{
+            // Set Request parameter
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("name", name);
+            jsonObject.addProperty("phoneNo", phoneNo);
+            jsonObject.addProperty("email", email);
+
+
+            Gson gson2 = new Gson();
+
+            String jsonString = gson2.toJson(jsonObject);
+            Log.i("hell", jsonString);
+            // data +=
+            // "{\"order\":{\"instructions\":\"\",\"paymentMethod\":\"COD\",\"items\":[{\"itemId\":962,\"name\":\"Cottage Cheese & Grilled Veggies Salad\",\"smallImageUrl\":\"/static/21/962_Cottage_Cheese_Salad200x200.jpg\",\"price\":249,\"itemType\":\"Veggies\",\"instructions\":\"instructions Abc\",\"quantity\":1},{\"itemId\":867,\"name\":\"Greek Salad\",\"smallImageUrl\":\"/static/21/867_Greek_Salad200x200.jpg\",\"price\":219,\"itemType\":\"Veggies\",\"instructions\":\"ABC\",\"quantity\":1}],\"deliveryCharges\":30,\"discountAmount\":117,\"discountPercentage\":25,\"finalOrderAmount\":397,\"discountList\":[{\"id\":4,\"name\":\"Corprate Discount\",\"category\":\"Discount\",\"type\":\"PERCENTAGE\",\"value\":25}],\"deliveryDateTime\":\"12-7-2015 19:45\"},\"customer\":{\"name\":\"hhhhh null\",\"phone\":9540095277,\"email\":\"rahul@cookedspecially.com\",\"address\":\"nvdiv eiv iwr\",\"deliveryArea\":\"DLF Phase 3\",\"city\":\"Gurgaon\",\"id\":9970}}";
+            // data += "{" + "\"phoneNumber\"" + ":\"" +
+            // mobileno.getText().toString()
+            // + "\"}";
+            data = jsonString;
+            // data +=
+            // "%7B%22order%22%3A%7B%22instructions%22%3A%22%22%2C%22paymentMethod%22%3A%22COD%22%2C%22items%22%3A%5B%7B%22itemId%22%3A962%2C%22name%22%3A%22Cottage+Cheese+%26+Grilled+Veggies+Salad%22%2C%22smallImageUrl%22%3A%22%2Fstatic%2F21%2F962_Cottage_Cheese_Salad200x200.jpg%22%2C%22price%22%3A249%2C%22itemType%22%3A%22Veggies%22%2C%22instructions%22%3A%22instructions+Abc%22%2C%22quantity%22%3A1%7D%2C%7B%22itemId%22%3A867%2C%22name%22%3A%22Greek+Salad%22%2C%22smallImageUrl%22%3A%22%2Fstatic%2F21%2F867_Greek_Salad200x200.jpg%22%2C%22price%22%3A219%2C%22itemType%22%3A%22Veggies%22%2C%22instructions%22%3A%22ABC%22%2C%22quantity%22%3A1%7D%5D%2C%22deliveryCharges%22%3A30%2C%22discountAmount%22%3A117%2C%22discountPercentage%22%3A25%2C%22finalOrderAmount%22%3A397%2C%22discountList%22%3A%5B%7B%22id%22%3A4%2C%22name%22%3A%22Corprate+Discount%22%2C%22category%22%3A%22Discount%22%2C%22type%22%3A%22PERCENTAGE%22%2C%22value%22%3A25%7D%5D%2C%22deliveryDateTime%22%3A%2212-7-2015+19%3A45%22%7D%2C%22customer%22%3A%7B%22name%22%3A%22hhhhh+null%22%2C%22phone%22%3A9540095277%2C%22email%22%3A%22rahul%40cookedspecially.com%22%2C%22address%22%3A%22nvdiv+eiv+iwr%22%2C%22deliveryArea%22%3A%22DLF+Phase+3%22%2C%22city%22%3A%22Gurgaon%22%2C%22id%22%3A9970%7D%7D";
+        }
+
+        // Call after onPreExecute method
+        protected SignupStatus doInBackground(String... urls) {
+
+
+            HttpURLConnection httpcon;
+
+            try {
+
+                httpcon = (HttpURLConnection) ((new URL("http://10.0.2.2:8000/signup/").openConnection()));
+                httpcon.setDoOutput(true);
+                httpcon.setRequestProperty("Content-Type", "application/json");
+                httpcon.setRequestProperty("Accept", "application/json");
+                httpcon.setRequestMethod("POST");
+                httpcon.connect();
+
+                OutputStream os = httpcon.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                writer.write(data);
+                writer.close();
+                os.close();
+                Log.i("hel", String.valueOf(httpcon.getErrorStream())+httpcon.getResponseMessage()+httpcon.getResponseCode());
+
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(httpcon.getInputStream(), "UTF-8"));
+
+                String line;
+                StringBuilder sb = new StringBuilder();
+
+                while ((line = br.readLine()) != null) {
+                    sb.append(line);
+                }
+
+                br.close();
+                Gson gson2 = new Gson();
+                Log.i("he;;", sb.toString());
+
+                result = gson2.fromJson(sb.toString(), SignupStatus.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // Append Server Response To Content String
+
+
+            /*****************************************************/
+            return result;
+        }
+        protected void onPostExecute(SignupStatus response) {
+            // NOTE: You can call UI Element here.
+
+            // Close progress dialog
+            Dialog.dismiss();
+
+          Log.i("response", String.valueOf(response)+Error);
+            if(response.getStatus().equals("success"))
+            {
+                Intent intent =new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(LoginActivity.this,response.getStatus(),Toast.LENGTH_LONG).show();
+            }
+
+
+
+                // Show Response Json On Screen (activity)
+                // uiUpdate.setText(Content);
+
+                /****************** Start Parse Response JSON Data *************/
+
+                // String OutputData = ""
+//                               	SharedPreferences sp = getApplicationContext()
+
+
+
+
+
+
+
+
+
+        }
+
+        private boolean isNetworkAvailable() {
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager
+                    .getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+
+    }
 }

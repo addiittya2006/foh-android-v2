@@ -49,6 +49,10 @@ dependencies {
     compile 'com.android.support:design:24.0.0'
     compile 'com.google.android.gms:play-services-auth:9.2.1'
     compile 'com.facebook.android:facebook-android-sdk:4.14.0'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
