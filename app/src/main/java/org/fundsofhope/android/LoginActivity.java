@@ -751,7 +751,7 @@ public class LoginActivity extends AppCompatActivity implements
 
             try {
 
-                httpcon = (HttpURLConnection) ((new URL("http://10.0.2.2:8000/signup/").openConnection()));
+                httpcon = (HttpURLConnection) ((new URL("http://api.fundsofhope.org/signup/").openConnection()));
                 httpcon.setDoOutput(true);
                 httpcon.setRequestProperty("Content-Type", "application/json");
                 httpcon.setRequestProperty("Accept", "application/json");
