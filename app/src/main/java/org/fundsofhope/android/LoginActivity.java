@@ -797,7 +797,7 @@ public class LoginActivity extends AppCompatActivity implements
             Dialog.dismiss();
 
           Log.i("response", String.valueOf(response)+Error);
-            if(response.getStatus().equals("success"))
+            if(response.getStatus().equals("success") || response.getStatus().equals("User updated"))
             {
                 Intent intent =new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
