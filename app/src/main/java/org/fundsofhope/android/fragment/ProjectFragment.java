@@ -11,13 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.fundsofhope.android.SplashActivity;
-import org.fundsofhope.android.adapters.MyAdapter;
+import com.google.gson.Gson;
+
+import org.fundsofhope.android.ProjectDescription;
+import org.fundsofhope.android.adapters.ProjectAdapter;
 import org.fundsofhope.android.R;
 import org.fundsofhope.android.config.ApiInterface;
 import org.fundsofhope.android.config.ServiceGenerator;
 import org.fundsofhope.android.model.Project;
 import org.fundsofhope.android.util.NetworkUtilities;
+import org.fundsofhope.android.util.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
@@ -27,7 +30,7 @@ import retrofit.client.Response;
 /**
  * Created by anip on 02/08/16.
  */
-public class HomeFragment extends Fragment {
+public class ProjectFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -35,11 +38,11 @@ public class HomeFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public HomeFragment() {
+    public ProjectFragment() {
     }
 
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
+    public static ProjectFragment newInstance() {
+        ProjectFragment fragment = new ProjectFragment();
 //        Bundle args = new Bundle();
 //        args.putInt(ARG_SECTION_NUMBER);
 //        fragment.setArguments(args);
@@ -49,7 +52,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_project, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
 //            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 //            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
@@ -68,16 +71,26 @@ public class HomeFragment extends Fragment {
                     new retrofit.Callback<ArrayList<Project>>() {
 
                         @Override
-                        public void success(ArrayList<Project> projects, Response response) {
+                        public void success(final ArrayList<Project> projects, Response response) {
                             mLayoutManager = new LinearLayoutManager(getActivity());
                             mRecyclerView.setLayoutManager(mLayoutManager);
                             // specify an adapter (see also next example)
-                            mAdapter = new MyAdapter(getActivity(),projects);
+                            mAdapter = new ProjectAdapter(getActivity(), projects);
                             mRecyclerView.setAdapter(mAdapter);
-
+                            mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, int position) {
+                                    Intent intent = new Intent(getActivity(), ProjectDescription.class);
+                                    Gson gson = new Gson();
+                                    intent.putExtra("project",gson.toJson(projects.get(position)));
+                                    Log.i("hell_selected", String.valueOf(projects.get(position).getTitle()));
+                                    startActivityForResult(intent, 80);
+                                }
+                            }));
                         }
 
-                        @Override
+
+                            @Override
                         public void failure(RetrofitError error) {
                             Log.d("TAG", "Response : Failure " + error.getMessage());
                         }

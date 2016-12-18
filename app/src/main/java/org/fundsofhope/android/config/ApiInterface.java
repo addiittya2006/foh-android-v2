@@ -1,6 +1,8 @@
 package org.fundsofhope.android.config;
 
+import org.fundsofhope.android.ProjectDescription;
 import org.fundsofhope.android.model.Project;
+import org.fundsofhope.android.model.Project_Description;
 import org.fundsofhope.android.model.SignupStatus;
 
 import java.util.ArrayList;
@@ -20,14 +22,19 @@ import retrofit.http.Query;
 public interface ApiInterface {
     //SIGNUP
     @Headers("Content-Type: application/json")
-    @POST("/signup/")
+    @POST("/user/signup/")
     void signup(
             @Query("name") String name,
             @Query("phoneNo") String phoneNo,
             @Query("email") String email,
             Callback<SignupStatus> callback);
 
-    @GET("/projects/all")
+    @GET("/project")
     void projects(
             Callback<ArrayList<Project>> callback);
+    @GET("/project")
+    void project_detail(
+            @Query("_id") int id,
+            Callback<Project_Description> callback);
+
 }

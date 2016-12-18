@@ -6,10 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.fundsofhope.android.R;
 import org.fundsofhope.android.model.Project;
@@ -19,13 +19,16 @@ import java.util.ArrayList;
 /**
  * Created by anip on 02/08/16.
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
     private String[] mDataset;
     private ArrayList<Project> projects;
+    private Activity context;
+    public static final String BASE_URL="http://api.fundsofhope.org/";
 
 
-    public MyAdapter(FragmentActivity activity, ArrayList<Project> project) {
+    public ProjectAdapter(Activity context, ArrayList<Project> project) {
         projects = project;
+        this.context = context;
 
     }
 
@@ -35,26 +38,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
+        public ImageView header_image;
         public ViewHolder(View v) {
             super(v);
             mTextView = (TextView) v.findViewById(R.id.info_text);
+            header_image = (ImageView) v.findViewById(R.id.header);
+
 //            mTextView = v;
 
         }
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(String[] myDataset) {
+    public ProjectAdapter(String[] myDataset) {
         mDataset = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public ProjectAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                        int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.my_text_view, parent, false);
+                .inflate(R.layout.project_adapter_view, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -66,6 +72,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(projects.get(position).getTitle()+"\n"+projects.get(position).getCost());
+        Picasso.with(context).load(BASE_URL+projects.get(position).getImage()).into(holder.header_image);
 
     }
 

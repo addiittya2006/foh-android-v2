@@ -1,22 +1,23 @@
 package org.fundsofhope.android.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.internal.bind.ArrayTypeAdapter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
- * Created by anip on 02/08/16.
+ * Created by anip on 18/12/16.
  */
-public class Project implements Serializable {
+public class Project_Description implements Serializable {
     @SerializedName("title")
     private String title;
     @SerializedName("cost")
     private long cost;
     @SerializedName("description")
     private String description;
-    @SerializedName("header")
-    private String image;
-    @SerializedName("id")
+    @SerializedName("images")
+    private ArrayList<String> images;
     private int id;
 
     public String getTitle() {
@@ -43,19 +44,12 @@ public class Project implements Serializable {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+
+    public ArrayList<String> getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
     }
 }

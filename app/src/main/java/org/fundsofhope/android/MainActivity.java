@@ -14,21 +14,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import org.fundsofhope.android.fragment.HomeFragment;
+import org.fundsofhope.android.fragment.ProjectFragment;
 import org.fundsofhope.android.fragment.PlaceHolderFragment;
-import org.fundsofhope.android.model.Project;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -102,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             switch (position) {
                 case 0:
-                    return HomeFragment.newInstance();
+                    return ProjectFragment.newInstance();
                 default:
                     return PlaceHolderFragment.newInstance(position + 1);
 
