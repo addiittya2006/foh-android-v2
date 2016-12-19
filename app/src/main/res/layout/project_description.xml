@@ -36,6 +36,12 @@
                     android:padding="10dp"
                     android:text="Title"
                     android:textColor="@android:color/black"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Donate"
+                    android:id="@+id/donate"
+                    android:layout_gravity="right"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

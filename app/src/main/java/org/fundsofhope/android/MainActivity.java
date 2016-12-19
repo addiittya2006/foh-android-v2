@@ -19,8 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.fundsofhope.android.fragment.NgoFragment;
 import org.fundsofhope.android.fragment.ProjectFragment;
 import org.fundsofhope.android.fragment.PlaceHolderFragment;
+import org.fundsofhope.android.fragment.TrendingFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
+        mViewPager.setOffscreenPageLimit(3);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             switch (position) {
                 case 0:
                     return ProjectFragment.newInstance();
+                case 1:
+                    return TrendingFragment.newInstance();
+                case 2:
+                    return NgoFragment.newInstance();
                 default:
                     return PlaceHolderFragment.newInstance(position + 1);
 

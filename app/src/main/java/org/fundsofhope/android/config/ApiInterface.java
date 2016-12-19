@@ -1,6 +1,7 @@
 package org.fundsofhope.android.config;
 
 import org.fundsofhope.android.ProjectDescription;
+import org.fundsofhope.android.model.Ngo;
 import org.fundsofhope.android.model.Project;
 import org.fundsofhope.android.model.Project_Description;
 import org.fundsofhope.android.model.SignupStatus;
@@ -36,5 +37,14 @@ public interface ApiInterface {
     void project_detail(
             @Query("_id") int id,
             Callback<Project_Description> callback);
+    @GET("/ngo")
+    void ngo(
+            Callback<ArrayList<Ngo>> callback
+    );
+    @GET("/trending")
+    void trending(
+            Callback<ArrayList<Project>> callback
+    );
+
 
 }
