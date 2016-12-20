@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ButtonBarLayout;
@@ -56,14 +57,14 @@ public class ProjectDescription extends AppCompatActivity {
     private TextView description;
     private Project_Description projectDescription;
     ViewPager mViewPager;
-    private Button donate;
+    private FloatingActionButton donate;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.project_description);
         Gson gson = new Gson();
         project = gson.fromJson(getIntent().getStringExtra("project"),Project.class);
-        donate = (Button) findViewById(R.id.donate);
+        donate = (FloatingActionButton) findViewById(R.id.donate);
         donate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

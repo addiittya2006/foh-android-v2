@@ -119,9 +119,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 case 0:
                     return "Projects";
                 case 1:
-                    return "Home";
+                    return "Trending";
                 case 2:
-                    return "Registered NGOs";
+                    return "Partners";
             }
             return null;
         }
