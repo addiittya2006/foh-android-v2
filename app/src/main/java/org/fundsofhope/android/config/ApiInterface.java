@@ -1,15 +1,14 @@
 package org.fundsofhope.android.config;
 
-import org.fundsofhope.android.ProjectDescription;
 import org.fundsofhope.android.model.Ngo;
+import org.fundsofhope.android.model.NgoDescription;
 import org.fundsofhope.android.model.Project;
-import org.fundsofhope.android.model.Project_Description;
+import org.fundsofhope.android.model.ProjectDescription;
 import org.fundsofhope.android.model.SignupStatus;
 
 import java.util.ArrayList;
 
 import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -36,7 +35,7 @@ public interface ApiInterface {
     @GET("/project")
     void project_detail(
             @Query("_id") int id,
-            Callback<Project_Description> callback);
+            Callback<ProjectDescription> callback);
     @GET("/ngo")
     void ngo(
             Callback<ArrayList<Ngo>> callback
@@ -44,6 +43,19 @@ public interface ApiInterface {
     @GET("/trending")
     void trending(
             Callback<ArrayList<Project>> callback
+    );
+    @GET("/ngo")
+    void ngo_detail(
+            @Query("_id") int id,
+            Callback<NgoDescription> callback
+    );
+    @FormUrlEncoded
+    @POST("/project/donate")
+    void donate(
+            @Field("user_id") int user_id,
+            @Field("project_id") int project_id,
+            @Field("amount") int amount,
+            Callback<SignupStatus> callback
     );
 
 

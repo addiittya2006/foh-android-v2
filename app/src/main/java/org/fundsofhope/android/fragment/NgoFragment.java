@@ -1,9 +1,9 @@
 package org.fundsofhope.android.fragment;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 
-import org.fundsofhope.android.ProjectDescription;
+import org.fundsofhope.android.NgoDescriptionActivity;
 import org.fundsofhope.android.R;
 import org.fundsofhope.android.adapters.NgoAdapter;
 import org.fundsofhope.android.config.ApiInterface;
@@ -70,9 +70,9 @@ public class NgoFragment extends Fragment {
                             mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, int position) {
-                                    Intent intent = new Intent(getActivity(), ProjectDescription.class);
+                                    Intent intent = new Intent(getActivity(), NgoDescriptionActivity.class);
                                     Gson gson = new Gson();
-                                    intent.putExtra("project",gson.toJson(ngo.get(position)));
+                                    intent.putExtra("ngo",gson.toJson(ngo.get(position)));
                                     Log.i("hell_selected", String.valueOf(ngo.get(position).getName()));
                                     startActivityForResult(intent, 80);
                                 }

@@ -48,9 +48,15 @@
             android:label="Fundsofhope"/>
 
         <activity
-            android:name=".ProjectDescription"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".ProjectDescriptionActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".NgoDescriptionActivity"
+            android:theme="@style/AppTheme"/>
 
+        <activity
+            android:name=".SuccessDonation"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/AppTheme.NoActionBar"/>

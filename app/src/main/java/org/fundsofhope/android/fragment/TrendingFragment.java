@@ -2,7 +2,6 @@ package org.fundsofhope.android.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +12,8 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 
-import org.fundsofhope.android.ProjectDescription;
+import org.fundsofhope.android.ProjectDescriptionActivity;
 import org.fundsofhope.android.R;
-import org.fundsofhope.android.adapters.ProjectAdapter;
 import org.fundsofhope.android.adapters.TrendingAdapter;
 import org.fundsofhope.android.config.ApiInterface;
 import org.fundsofhope.android.config.ServiceGenerator;
@@ -75,7 +73,7 @@ public class TrendingFragment extends Fragment{
                             mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(), new RecyclerItemClickListener.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, int position) {
-                                    Intent intent = new Intent(getActivity(), ProjectDescription.class);
+                                    Intent intent = new Intent(getActivity(), ProjectDescriptionActivity.class);
                                     Gson gson = new Gson();
                                     intent.putExtra("project",gson.toJson(projects.get(position)));
                                     Log.i("hell_selected", String.valueOf(projects.get(position).getTitle()));

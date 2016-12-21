@@ -1,7 +1,6 @@
 package org.fundsofhope.android.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.internal.bind.ArrayTypeAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by anip on 18/12/16.
  */
-public class Project_Description implements Serializable {
+public class ProjectDescription implements Serializable {
     @SerializedName("title")
     private String title;
     @SerializedName("cost")
@@ -43,7 +42,6 @@ public class Project_Description implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public ArrayList<String> getImages() {
         return images;
