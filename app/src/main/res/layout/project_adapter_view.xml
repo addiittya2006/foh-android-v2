@@ -7,7 +7,7 @@
               android:layout_marginLeft="20dp"
               android:layout_marginBottom="20dp"
               android:layout_marginRight="20dp">
-    <!-- A CardView that contains a TextView -->
+
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -26,7 +26,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="160dp"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/foh_ic_launcher"
                     android:id="@+id/header"
                     android:scaleType="centerCrop"/>
 
@@ -52,4 +52,5 @@
             </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
 </LinearLayout>

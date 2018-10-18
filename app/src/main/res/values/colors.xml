@@ -23,4 +23,6 @@
     <color name="colorAccent8">#FF8F00</color>
     <color name="colorAccent9">#FF6F00</color>
 
+    <color name="colorSecondary">#FFFFFF</color>
+
 </resources>

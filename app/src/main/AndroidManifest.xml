@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="org.fundsofhope.android"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.fundsofhope.android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/foh_ic_launcher"
+        android:roundIcon="@mipmap/foh_ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/fb_app_id"/>
-
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar.Full"
@@ -28,6 +25,31 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="FundsofHope"/>
+
+        <activity
+            android:name=".ui.project.ProjectDescriptionActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".ui.ngo.NgoDescriptionActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".ui.project.DonationSuccessActivity"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/fb_app_id"/>
 
         <activity
             android:name="com.facebook.CustomTabActivity"
@@ -41,25 +63,6 @@
                 <data android:scheme="@string/fb_login_protocol_scheme"/>
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="Fundsofhope"/>
-
-        <activity
-            android:name=".ProjectDescriptionActivity"
-            android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".NgoDescriptionActivity"
-            android:theme="@style/AppTheme"/>
-
-        <activity
-            android:name=".SuccessDonation"
-            android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

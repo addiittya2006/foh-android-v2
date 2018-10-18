@@ -1,31 +1,33 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto" android:layout_height="wrap_content"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:layout_marginLeft="20dp"
     android:layout_marginBottom="20dp"
     android:layout_marginRight="20dp">
-    <!-- A CardView that contains a TextView -->
 
     <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:elevation="10dp"
         android:layout_height="250dp"
         android:layout_marginBottom="2dp"
-        card_view:cardCornerRadius="4dp">
+        app:cardCornerRadius="4dp">
+
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end">
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/foh_ic_launcher"
                 android:id="@+id/header"
                 android:scaleType="centerCrop"/>
+
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/buttonFloat"
                 android:layout_width="36dp"
@@ -35,6 +37,7 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="142dp"
                 android:layout_alignParentEnd="true" />
+
             <TextView
                 android:id="@+id/info_text"
                 android:padding="10dp"
@@ -43,7 +46,9 @@
                 android:text="title"
                 android:layout_gravity="left|bottom"
                 android:layout_below="@id/header"/>
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
 </LinearLayout>
